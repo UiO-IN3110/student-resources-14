@@ -1,0 +1,147 @@
+\documentclass{article}
+
+% Package Pygments for fancy typesetting of code
+\usepackage{minted}
+\usemintedstyle{default}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+
+% Hyperlinks in PDF: \href{url}{linktext}
+\definecolor{linkcolor}{rgb}{0,0,0.4}
+\usepackage[%
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor,
+    citecolor=black,
+    filecolor=black,
+]{hyperref}
+
+\begin{document}
+
+\title{Example on a \LaTeX{} report}
+
+\author{
+John Doe\footnote{\texttt{john.doe@cyberspace.net}.}
+\and
+Kari Nordmann\footnote{\texttt{kari.normann@veven.no}.}
+}
+
+\date{\today}
+
+% Generate title, author, and date
+\maketitle
+
+\begin{abstract}
+This document demonstrates the most basic syntax for writing \LaTeX{}
+reports. A much more comprehensive, yet compact, introduction
+to LaTeX{} is \href{http://tobi.oetiker.ch/lshort/lshort.pdf}{
+The not so short introduction to LaTeX}.
+\end{abstract}
+
+\section{Some calculations}
+\label{sec:calc}
+
+In this section, we will introduce some basic calculations that
+will be implemented in Python in Section \ref{sec:py}.
+
+\subsection{Addition}
+\label{sec:add}
+
+Given $a=4$ and $b=5$, we can compute the sum
+
+% Equation with equation number
+\begin{equation}
+a + b = 9.
+\label{sec:add:eq}
+\end{equation}
+
+\subsection{Subtraction}
+
+Instead of adding numbers, as done in Section \ref{sec:add}
+(see Equation (\ref{sec:add:eq})), we can subtract them:
+
+% Equation without equation number
+\[ a - b = -1. \]
+
+\paragraph{Practical application.}
+The mathematician was asked, after having observed that $a$ people
+entered a house and $b$ came out after a while: ``How many people are
+in the house?'' He said, \emph{given the particular data in Section
+\ref{sec:add}: minus one guy!}
+
+\section{Implementation}
+\label{sec:py}
+
+The following code implements the calculations from Section \ref{sec:calc}:
+
+\begin{minted}{python}
+def add(a, b):
+    """Return the sum of a and b."""
+    return a + b
+
+def sub(a, b):
+    """Return the difference of a and b."""
+    return a - b
+
+def test_add():
+    a = 4
+    b = 5
+    exact = 9
+    result = sum(a, b)
+    success = result == exact
+    msg = 'sum(%g, %g) = %g != %g' (a, b, result, exact)
+    assert success, msg
+
+def test_sub():
+    assert sub(4, 5) == -1, 'sub cannot subtract'
+\end{minted}
+
+\paragraph{Remark.}
+This nice typesetting of code is produced by the
+\href{http://pygments.org/}{Pygments} package. You must
+enclose the code in
+% \verb!xxx! will typeset xxx in monospace font - all characters
+% are allowed
+\verb!\begin{minted}{python}! and
+\verb!\end{minted}{python}!. Pygments is installed by
+\verb!sudo apt-get install python-pygments!
+on an Ubuntu computer, but it is also very
+easy to install the package by downloading the Python source
+code and running \verb!sudo python setup.py install! in the usual way.
+
+\section{Figures}
+
+Figures can be in PDF, PNG or JPEG formats. This is the syntax for
+including a figure in the file \verb!figs/my_fig.pdf! in a \LaTeX{}
+document:
+
+\begin{minted}{latex}
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{figs/my_fig.pdf}
+\caption{
+Here goes the figure caption with explanations.
+}
+\end{figure}
+\end{minted}
+
+\appendix
+\section{How to compile this document}
+
+LaTeX{} documents are stored in with names files ending in
+% \texttt{} gives monospace font for words (special characters like _
+% must be preceded by a backslash - in such cases \verb is simpler to use)
+\texttt{.tex}.
+Such files must be \emph{compiled} with the \texttt{pdflatex} program:
+
+\begin{minted}{bash}
+Terminal> pdflatex -shell-escape mydoc
+Terminal> pdflatex -shell-escape mydoc
+\end{minted}
+You have to run twice (or sometimes a third time) to get all cross
+references in the document right. The option \verb!-shell-espace!
+is necessary only if you use Pygments (the \texttt{minted}
+environment) for typesetting code.
+
+\end{document}
