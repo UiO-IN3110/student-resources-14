@@ -1,0 +1,179 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyvrb}
+
+\author{
+\{Jonathan Feinberg, Joakim Sundnes\} \\
+\tt{\{jonathf,sundnes\}@simula.no}
+}
+\date{\today}
+\title{1. obligatoriske innlevering, høsten 2014}
+
+\begin{document}
+
+\maketitle
+
+[Something about resources and deadlines]
+\begin{verbatim}
+git clone <username>@github.com/UiO-INF3331/resources-14.git
+\end{verbatim}
+
+\section{Innleveringskrav}
+
+Det forventes at alle skriptene beskrevet i oppgavene blir skrevet.
+I tillegg skal en oppsummering skrives i et latex-dokument.
+Denne skal følge malen gitt i enten \verb;latex_mal.tex; eller
+\verb;eksempel.tex; (Legges ut 2. september).
+Alt skal lastes opp på GIT.
+[Hvordan vi forventer at de skal gjøre dette]
+
+\section*{Del 1: Bash}
+
+Før du begynner, må du lage et filtre gjennom
+\verb;generate_file_tree.pyc;:
+\begin{Verbatim}[fontsize=\small, frame=single]
+$ python generate_file_tree.pyc file_tree -d 3 -f 5 -s 800 -r 3 \
+        -e 123 -x 1388534400 -y 1406851200 -c
+\end{Verbatim}
+Denne nøyaktige setningen må brukes for å forsikre om at alle har
+det samme filtreet og får samme resultater.
+
+Alle komponenter brukt i oppgavene her må være en del av enten Bash
+eller standard GNU/Linux-biblioteket.
+Til hjelp nevner vi følgende tilgjengelige verktøy:
+
+\begin{tabular}{rl}
+    \verb;cat;      &   Concatenate files and print on the standard output. \\
+    \verb;du;       &   Estimate file space usage. \\
+    \verb;echo;     &   Display a line of text. \\
+    \verb;find;     &   Search file tree for files. \\
+    \verb;grep;     &   Print lines matching a pattern. \\
+    \verb;rm;       &   Remove files or directories.\\
+    \verb;sort;     &   Sort lines of text files. \\
+    \verb;wc;       &   Print newline, word, and byte counts for each file. \\
+    \verb;xargs;    &   Build and execute command lines from standard input.
+\end{tabular}
+
+Husk å gjøre skript eksekvebare før de kjøres:
+\begin{Verbatim}[fontsize=\small, frame=single]
+$ chmod +x skript.sh
+\end{Verbatim}
+
+\newpage
+
+\subsection*{Oppgave 1.1}
+List opp alle filer som er modifisert de siste \verb;n; dagene.
+La utskriften inkludere og være sortet på filstørrelse.
+For eksempel:
+\begin{Verbatim}[fontsize=\small, frame=single]
+$ ./list_new_files.sh filetree/ 80
+36K     file_tree/Pkvye/htZiVgRE
+48K     file_tree/Kq0Wv/5RYWI5kQ
+104K    file_tree/Kq0Wv/MH/7GvTL2y
+184K    file_tree/zg/grYxji7
+564K    file_tree/zg/Hu/dNmOlK
+644K    file_tree/Kq0Wv/MH/XhdhBbk
+\end{Verbatim}
+Merk at utskriften vil forandre seg med hvilken dag en kjøres.
+
+\subsection*{Oppgave 1.2}
+Find alle filer som inneholder et gitt ord.
+Merk at vi snakker om på innsiden av filen, ikke filnavnet.
+For eksempel, ved bruk av ordene ``what'' og ``hallo'' får vi
+følgende:
+\begin{Verbatim}[fontsize=\small, frame=single]
+$ ./find_word.sh file_tree/ what
+file_tree/Pkvye/vlfN/ZLbGhCmj:8687:NDa6gmZswhat77iTUFuoNiG23Y
+$ ./find_word.sh filetree/ hello
+No files containing "hello" found.
+\end{Verbatim}
+
+\subsection*{Oppgave 1.3}
+Slett alle filer i filtreet med størrelse større enn en gitt verdi.
+Størrelsen er gitt i kilobyte.
+Print ut navnene på filene som slettes.
+For eksempel:
+\begin{Verbatim}[fontsize=\small, frame=single]
+$ ./sized_delete.sh file_tree 750
+Deleting...
+file_tree/zg/Hu/vv/2KKnyIt5
+file_tree/Pkvye/vlfN/ZLbGhCmj
+file_tree/Kq0Wv/MH/zWG/8puxfjS
+file_tree/Kq0Wv/MH/Z9kP8NB
+$ ./sized_delete.sh file_tree 750
+No files of size 750 kilobytes or larger found.
+\end{Verbatim}
+
+\subsubsection*{Hint}
+Back-ticks tillater at man utfører en del-komando:
+\begin{Verbatim}[fontsize=\small, frame=single]
+count=`<bash command>`
+\end{Verbatim}
+Dette kan være nyttig å ha for å for eksempel identifisere om man
+har 0 eller flere filer som passer størrelseskriteriet.
+
+\subsection*{Oppgave 1.4}
+Sorter linjene i en fil og lagre dem i en ny fil.
+For eksempel:
+\begin{Verbatim}[fontsize=\small, frame=single]
+$ sh sort_file.sh unsorted_fruits sorted_fruits
+$ cat sorted_fruits
+apple
+grape
+orange
+pear
+pineapple
+\end{Verbatim}
+
+\section*{Del 2: Python}
+
+I denne oppgaven skal dere skrive et Python skript som gjenskaper
+en del av funksjonaliteten i \verb;generate_file_tree.pyc;.
+Skriptet skal inneholde følgende egenskaper:
+\begin{itemize}
+    \item Skriptet skal kunne skrives fra Bash/Cmd som et eget
+        program og skal kreve de følgende tre argumentene:
+        \verb;target;, \verb;folders; and \verb;files;.
+    \item Det skal også være mulig å inkludere de følgende
+        argumentene:
+        \verb;size;, \verb;rec_depth;, \verb;start;, \verb;end;,
+        \verb;seed; and \verb;verbose;
+    \item \verb;target; bestemmer mappen hvor treet skal bygges.
+    \item \verb;rec_depth; bestemmer nivået undermappene får lov til
+        å gå.
+    \item Hvis \verb;verbose; er inkludert (med hvilken som helst
+        verdi), skal skriptet skrive ut de stegene den tar.
+    \item Skriptet skal være tilfeldig (random) i de fleste
+        aspekter:
+        tilfeldig fil- og mappenavn, tilfeldig filinnhold,
+        tilfeldig aksesert og modifisert tidstempling (atime \&
+        mtime), og tilfeldig filstørrelse.
+    \item Hvis man inkluderer \verb;seed; som en numerisk verdi,
+        skal skriptet være deterministisk.
+        Mao. skriptet skal gi samme resultat hvis repetert.
+        Dette kan oppnås ved å bruke \verb;random.seed; funksjonen
+        og kun hente tilfeldige elementer fra \verb;random;
+        modulen.
+    \item Argumentene \verb;dirs;, \verb;files;, \verb;size;,
+        \verb;start; og \verb;end; er alle grenseverdier.
+        Hver mappe skal ha $d\in$\verb;[0,dirs]; undermapper
+        (gitt at \verb;rec_depth; ikke er nådd), og
+        $f\in$\verb;[0,files]; filer.
+        Hver fil skal inneholde $s\in$\verb;[1,size*1024]; karakterer
+    \item Markørene for både aksesert tid (atime) og modifisert tid
+        (mtime) skal ha $t\in$\verb;start,end;.
+        Atime og mtime skal som hovedregel være ulike.
+        Datoen skal for enkelthetens skyld være formatert i
+        Unix/Epoch tid notert i sekunder.
+\end{itemize}
+
+Denne oppgaven skal løses platformsuavhengig.
+Med andre ord, vil vi ikke akseptere løsninger som tilkaller Bash,
+som \verb;os.system; eller \verb;Popen;.
+
+Som hjelp kan du bruke malen: \verb;my_generate_file_tree.py;.
+Modifiser den etter behov, men husk å endre dokumentasjon deretter.
+
+\end{document}
