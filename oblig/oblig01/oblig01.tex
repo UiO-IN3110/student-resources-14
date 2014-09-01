@@ -6,7 +6,7 @@
 
 \author{
 \{Jonathan Feinberg, Joakim Sundnes\} \\
-\tt{\{jonathfe,sundnes\}@simula.no}
+\tt{\{jonathf,sundnes\}@simula.no}
 }
 \date{\today}
 \title{1. obligatoriske innlevering, høsten 2014}
@@ -15,31 +15,31 @@
 
 \maketitle
 
-[Something about resources and deadlines]
-\begin{verbatim}
-git clone <username>@github.com/UiO-INF3331/resources-14.git
-\end{verbatim}
-
 \section*{Innleveringskrav}
 
 Det forventes at alle skriptene beskrevet i oppgavene blir skrevet.
 I tillegg skal en oppsummering skrives i et latex-dokument.
-Denne skal følge malen gitt i enten \verb;latex_mal.tex; eller
-\verb;eksempel.tex; (Legges ut 2. september).
-Alt skal lastes opp på GIT.
-[Hvordan vi forventer at de skal gjøre dette]
+Denne skal følge malen gitt på emnesidene
+(Legges ut 2. september).
+Innlevering skjer ved opplasting til github. Mer informasjon om
+klasseromsløsningen vi bruker på github vil bli gitt i god tid før
+innleveringsfristen.
+
+Resurser som er nyttige for oppgaven blir lagt ut på emnesiden,
+under linken Obligatoriske oppgaver.
 
 \section*{Del 1: Bash}
 
-Før du begynner, må du lage et filtre gjennom
-\verb;generate_file_tree.pyc;:
+\subsection*{Filtre}
+Før du begynner, må du pakke ut filtreet:
 \begin{Verbatim}[fontsize=\small, frame=single]
-$ python generate_file_tree.pyc file_tree -d 3 -f 5 -s 800 -r 3 \
-        -e 123 -x 1388534400 -y 1406851200 -c
+$ tar -xxvf file_tree.tar.gz
 \end{Verbatim}
-Denne nøyaktige setningen må brukes for å forsikre om at alle har
-det samme filtreet og får samme resultater.
+\subsubsection*{Obs}
+Første versjonen av obligen, var dette gjort med et skript.
+Dette er endret.
 
+\subsection*{Nyttige verktøy}
 Alle komponenter brukt i oppgavene her må være en del av enten Bash
 eller standard GNU/Linux-biblioteket.
 Til hjelp nevner vi følgende tilgjengelige verktøy:
@@ -129,8 +129,8 @@ pineapple
 
 \section*{Del 2: Python}
 
-I denne oppgaven skal dere skrive et Python skript som gjenskaper
-en del av funksjonaliteten i \verb;generate_file_tree.pyc;.
+I denne oppgaven skal dere skrive et Python skript som skaper et
+filtre ikke veldig ulikt vedlagt i tar-formatet.
 Skriptet skal inneholde følgende egenskaper:
 \begin{itemize}
     \item Skriptet skal kunne skrives fra Bash/Cmd som et eget
