@@ -118,8 +118,8 @@ if __name__ == "__main__":
     rec_depth = l<6 and 2 or int(sys.argv[5])
     start = l<7 and 1388534400 or int(sys.argv[6])
     end = l<8 and 1406851200 or int(sys.argv[7])
-    seed = [l<9 and "0" or sys.argv[8]][0]
-    verbose = [l<10 and "0" or sys.argv[9]][0]
+    seed = l<9 and "0" or sys.argv[8]
+    verbose = l<10 and "0" or sys.argv[9]
 
     # Fix the random seed (if not None):
     random.seed(int(seed) or None)
