@@ -124,7 +124,7 @@ if __name__ == "__main__":
     # Fix the random seed (if not None):
     random.seed(int(seed) or None)
 
-    generate_tree(target, dirs, rec_depth, verbose)
-    populate_tree(target, files, size, start, end, verbose)
+    generate_tree(target, dirs, rec_depth, int(verbose))
+    populate_tree(target, files, size, start, end, int(verbose))
 
 
