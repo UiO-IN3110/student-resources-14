@@ -1,0 +1,12 @@
+** Installation
+
+On local ubuntu machine:
+
+$ sudo apt-get install python-py
+
+or
+
+$ sudo apt-get install python-nose
+
+
+On UiO python-nose is available, and you should use that.
