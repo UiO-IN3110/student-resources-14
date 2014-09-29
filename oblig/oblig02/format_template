@@ -1,0 +1,42 @@
+% Rett før preamble:
+
+\usepackage{fancyvrb}
+\usepackage{framed}
+\usepackage{color}
+\providecommand{\shadedwbar}{}
+\definecolor{shadecolor}{rgb}{0.87843, 0.95686, 1.0}
+\renewenvironment{shadedwbar}{
+\def\FrameCommand{\color[rgb]{0.7,     0.95686, 1}\vrule width 1mm\normalcolor\colorbox{shadecolor}}\FrameRule0.6pt
+\MakeFramed {\advance\hsize-2mm\FrameRestore}\vskip3mm}{\vskip0mm\endMakeFramed}
+\providecommand{\shadedquoteBlueBar}{}
+\renewenvironment{shadedquoteBlueBar}[1][]{
+\bgroup\rmfamily
+\fboxsep=0mm\relax
+\begin{shadedwbar}
+\list{}{\parsep=-2mm\parskip=0mm\topsep=0pt\leftmargin=2mm
+\rightmargin=2\leftmargin\leftmargin=4pt\relax}
+\item\relax}
+{\endlist\end{shadedwbar}\egroup}
+
+
+% Start shaded blue enviroment:
+
+\begin{shadedquoteBlueBar}
+\fontsize{9pt}{9pt}
+\begin{Verbatim}
+
+% End shaded blue enviroment:
+
+\end{Verbatim}
+\end{shadedquoteBlueBar}
+\noindent
+
+% Begin execution enviroment:
+
+\begin{Verbatim}[numbers=none,frame=lines,label=\fbox{{\tiny Terminal}},fontsize=\fontsize{9pt}{9pt},
+labelposition=topline,framesep=2.5mm,framerule=0.7pt]
+
+% End execution enviroment:
+
+\end{Verbatim}
+\noindent
