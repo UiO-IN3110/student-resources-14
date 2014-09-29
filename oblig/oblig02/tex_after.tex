@@ -1,0 +1,50 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyvrb}
+
+\begin{document}
+
+
+\section*{Code import}
+
+\begin{Verbatim}
+    out = 1.
+    for o in xrange(2, order+1):
+        out *= o
+    return out
+\end{Verbatim}
+
+\section*{Code execution}
+
+\vspace{4pt}
+\begin{Verbatim}
+$ python script_example.py 4
+24.0
+\end{Verbatim}
+\noindent
+
+\section*{Fake import}
+
+\begin{Verbatim}
+This could be code.
+\end{Verbatim}
+
+\section*{Fake execusion}
+
+\begin{Verbatim}
+$ python fake_name.py
+24.0
+\end{Verbatim}
+\noindent
+
+\section*{Branching}
+
+
+\begin{Verbatim}
+for i in xrange(10):
+    print i+1
+\end{Verbatim}
+
+\end{document}

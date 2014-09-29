@@ -1,0 +1,48 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\section*{Code import}
+
+%@import script_example.py " *out =(.|\n)*?return out"
+
+\section*{Code execution}
+
+%@exec python script_example.py 4
+
+\section*{Fake import}
+
+%@verb
+This could be code.
+%@
+
+\section*{Fake execusion}
+
+%@python fake_name.py
+out = 1.
+for o in xrange(2, 4):
+    out *= o
+print out
+%@
+
+\section*{Branching}
+
+%@show lang==matlab
+%@verb
+for i=1:10
+    i
+end
+%@
+%@fi
+
+%@show lang==python
+%@verb
+for i in xrange(10):
+    print i+1
+%@
+%@fi
+
+\end{document}
