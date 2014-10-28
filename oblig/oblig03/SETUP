@@ -1,0 +1,14 @@
+** Installation **
+******************
+
+Prerequsits:
+gcc
+
+Compile by running:
+$ make
+
+The file disasterafter.jpg is created from disasterbefore.jpg by
+running the following command:
+
+$ ./denoise 0.1 10 disaster_before.jpg disaster_after.jpg
+
