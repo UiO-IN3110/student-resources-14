@@ -38,7 +38,7 @@ if __name__ == "__main__":
     x = np.cumsum(np.random.normal(0, 1, 10**order))
 
     cProfile.run("numpy_filter(x)", "numpy_timing")
-    pstats.Stats("numpy_timing").sort_stats("cum").print_stats()
+    pstats.Stats("numpy_timing").sort_stats("cumulative").print_stats()
 
     cProfile.run("weave_filter(x)", "weave_timing")
     pstats.Stats("weave_timing").print_stats("weave_examples\.py")
