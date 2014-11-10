@@ -7,8 +7,15 @@ gcc
 Compile by running:
 $ make
 
+In the case make fails, you can try the following:
+$ make clean
+$ cd simple-jpeg
+$ make clean
+$ make
+$ cd ..
+$ make
+
 The file disasterafter.jpg is created from disasterbefore.jpg by
 running the following command:
 
 $ ./denoise 0.1 10 disaster_before.jpg disaster_after.jpg
-
